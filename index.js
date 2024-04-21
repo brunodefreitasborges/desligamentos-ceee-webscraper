@@ -16,17 +16,17 @@ app.get('/download', (req, res) => {
             const $ = cheerio.load(html);
 
             const dataList = [];
-            const maxItems = 50;
 
             $('ul#listaDesligamentos_list > li.ui-datalist-item').each((index, element) => {
-
-                if (index >= maxItems) {
-                    return false;
-                }
 
                 const title = $('.titulo', element).text().split(" - ");
                 const date = title[0].trim();
                 const city = title[2].trim();
+
+                if (city !== "PORTO ALEGRE") {
+                    return true; // Skip this iteration if city is not PORTO ALEGRE
+                }
+
                 const hour = $('.hora', element).text().trim();
 
                 const ruasArray = $('ul#listaDesligamentos\\:0\\:j_idt34_list > li.itens-listas')
