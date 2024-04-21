@@ -13,8 +13,7 @@ app.get('/download', (req, res) => {
             return response.text();
         })
         .then(html => {
-            res.send("Data fetched!")
-     /*        const $ = cheerio.load(html);
+            const $ = cheerio.load(html);
 
             const dataList = [];
 
@@ -39,11 +38,11 @@ app.get('/download', (req, res) => {
                 dataList.push(data);
             });
 
-            const jsonData = JSON.stringify(dataList, null, 2);
+            // const jsonData = JSON.stringify(dataList, null, 2);
        
             res.set('Content-Disposition', 'attachment; filename="data.json"');
             res.set('Content-Type', 'application/json');
-            res.send(jsonData); */
+            res.send("Fetching done. Skipping JSON");
 
         })
         .catch(error => {
