@@ -16,23 +16,28 @@ app.get('/download', (req, res) => {
             const $ = cheerio.load(html);
 
             const dataList = [];
+            const maxItems = 10;
 
             $('ul#listaDesligamentos_list > li.ui-datalist-item').each((index, element) => {
+
+                if (index >= maxItems) {
+                    return false;
+                }
 
                 const title = $('.titulo', element).text().split(" - ");
                 const date = title[0].trim();
                 const city = title[2].trim();
-                // const hour = $('.hora', element).text().trim();
+                const hour = $('.hora', element).text().trim();
 
-                // const ruasArray = $('ul#listaDesligamentos\\:0\\:j_idt34_list > li.itens-listas')
-                //     .map((index, element) => $(element).text().trim())
-                //     .get();
+                const ruasArray = $('ul#listaDesligamentos\\:0\\:j_idt34_list > li.itens-listas')
+                    .map((index, element) => $(element).text().trim())
+                    .get();
 
                 const data = {
                     Data: date,
                     Cidade: city,
-                    // Hora: hour,
-                    // Ruas: ruasArray
+                    Hora: hour,
+                    Ruas: ruasArray
                 };
 
                 dataList.push(data);
