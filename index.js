@@ -22,27 +22,27 @@ app.get('/download', (req, res) => {
                 const title = $('.titulo', element).text().split(" - ");
                 const date = title[0].trim();
                 const city = title[2].trim();
-                const hour = $('.hora', element).text().trim();
+                // const hour = $('.hora', element).text().trim();
 
-                const ruasArray = $('ul#listaDesligamentos\\:0\\:j_idt34_list > li.itens-listas')
-                    .map((index, element) => $(element).text().trim())
-                    .get();
+                // const ruasArray = $('ul#listaDesligamentos\\:0\\:j_idt34_list > li.itens-listas')
+                //     .map((index, element) => $(element).text().trim())
+                //     .get();
 
                 const data = {
                     Data: date,
                     Cidade: city,
-                    Hora: hour,
-                    Ruas: ruasArray
+                    // Hora: hour,
+                    // Ruas: ruasArray
                 };
 
                 dataList.push(data);
             });
 
-            // const jsonData = JSON.stringify(dataList, null, 2);
+            const jsonData = JSON.stringify(dataList, null, 2);
        
             res.set('Content-Disposition', 'attachment; filename="data.json"');
             res.set('Content-Type', 'application/json');
-            res.send("Fetching done. Skipping JSON");
+            res.send(jsonData);
 
         })
         .catch(error => {
