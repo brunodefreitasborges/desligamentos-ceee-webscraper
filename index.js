@@ -16,7 +16,7 @@ app.get('/download', (req, res) => {
             const $ = cheerio.load(html);
 
             const dataList = [];
-            const maxItems = 10;
+            const maxItems = 50;
 
             $('ul#listaDesligamentos_list > li.ui-datalist-item').each((index, element) => {
 
