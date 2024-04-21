@@ -13,13 +13,14 @@ app.get('/download', (req, res) => {
             return response.text();
         })
         .then(html => {
-            const $ = cheerio.load(html);
+            res.send("Data fetched!")
+     /*        const $ = cheerio.load(html);
 
             const dataList = [];
 
             $('ul#listaDesligamentos_list > li.ui-datalist-item').each((index, element) => {
 
-                const title = $('.titulo', element).text().split("-");
+                const title = $('.titulo', element).text().split(" - ");
                 const date = title[0].trim();
                 const city = title[2].trim();
                 const hour = $('.hora', element).text().trim();
@@ -42,7 +43,7 @@ app.get('/download', (req, res) => {
        
             res.set('Content-Disposition', 'attachment; filename="data.json"');
             res.set('Content-Type', 'application/json');
-            res.send(jsonData);
+            res.send(jsonData); */
 
         })
         .catch(error => {
