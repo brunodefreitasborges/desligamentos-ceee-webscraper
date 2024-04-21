@@ -4,7 +4,10 @@ import express from 'express';
 
 const app = express();
 
-app.get('/download', (req, res) => {
+app.get('/:cidade', (req, res) => {
+
+    const cidade = req.params.cidade;
+
     fetch('https://ceee.equatorialenergia.com.br/app/dp/DesligProgramado.xhtml')
         .then(response => {
             if (!response.ok) {
@@ -23,8 +26,8 @@ app.get('/download', (req, res) => {
                 const date = title[0].trim();
                 const city = title[2].trim();
 
-                if (city !== "PORTO ALEGRE") {
-                    return true; // Skip this iteration if city is not PORTO ALEGRE
+                if (city !== cidade) {
+                    return true;
                 }
 
                 const hour = $('.hora', element).text().trim();
